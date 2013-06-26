@@ -49,4 +49,20 @@ function showError(error)
       alert("An unknown error occurred.");
       break;
     }
-  }
+}
+function draw(image)
+{
+    image_set = new Array();
+    var p1 = new Image;
+    p1.src = "pic1.png";
+    image_set.push(p1);
+    var p2 = new Image;
+    p2.src = "pic2.png";
+    image_set.push(p2);
+    var p3 = new Image;
+    p3.src = "pic3.png";
+    image_set.push(p3);
+    var c1 = document.getElementById("c1");
+    var cont = c1.getContext("2d");
+    cont.drawImage(image_set[image-1], 0, 0);
+}

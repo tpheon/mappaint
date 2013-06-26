@@ -1,27 +1,48 @@
-#gallery
-{
-width:40px;
-height:40px;
-background:url(http://icons.iconarchive.com/icons/tpdkdesign.net/refresh-cl/256/Hardware-Camera-icon.png) 0 0; 
-
-}
 #gear
 {
 width:40px;
 height:40px;
 background:url(http://www.cs.cmu.edu/~junggon/tools/gear.png) 0 0; 
 }
-body
-{
-background-color:#333399;
-}
 #title
 {
 color:#FF3300;
 font-family:"Arial", Helvetica, sans-serif;
 }
-#stop
+.centered{
+margin: 0 auto;
+}
+canvas
 {
-margin-left:150px;
-margin-right:150px;
+    margin:0 auto;
+    border:6px solid black;
+}
+.mainscreen
+{
+    position:relative;
+    left:94px;
+}
+.slid{
+    position:relative;
+    left:60px;
+    width:400px;
+}
+.thumbnail
+{
+    float:left;
+    width:100px;
+    height:100px;
+    position:relative;
+    left:-60px;
+    margin:10px; 
+    z-index: 2;
+}
+.under
+{
+    position:relative;
+    left:-400px;
+    top:+10px;
+    margin:10px;
+    width:100px;
+    height:100px;
 }
