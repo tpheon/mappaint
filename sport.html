@@ -8,9 +8,33 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		<script type="text/javascript" src="js/colorpicker.js"></script>
+	<script type="text/javascript">
+	 $(document).ready(function() {
+                            var borderColor;
+
+            $('#colorpicker').ColorPicker({
+                onSubmit : function(hsb, hex, rgb, el) {
+                    $(el).val('#' + hex);
+                    $(el).ColorPickerHide();
+                    borderColor = $('#').val();
+                    $('#news').css('border-color', borderColor);
+                },
+                onBeforeShow : function() {
+                    $(this).ColorPickerSetColor(this.value);
+                }
+            }).bind('keyup', function() {
+
+                $(this).ColorPickerSetColor(this.value);
+
+            });
+        });
+
+    </script>
+
 </head> 
 
-<body onload="showLocation()"> 
+<body> 
 	<div data-role="page">
 	
 		<div data-role="header">
@@ -25,13 +49,23 @@
 			<!--Stop-->
 			<button id="stop" type="button" onclick="getLocation()">STOP</button>
 			<!--Settings-->
-			<a href="#settingsmenu" data-rel="popup" data-role="button" id ="gear">Settings</a>
+			a href="#settingsmenu" data-rel="popup" data-role="button"><div class="label">Settings</div></a>
 				<div data-role="popup" id="settingsmenu">
-					<p>HERE'S SOMETHING YA SHOULDA BUILT: MY ASS<p>
+					<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+						<div data-role="collapsible" data-inset="false">
+							<h2>Select Color</h2>
+							<div>
+								<label >Select Color</label>
+								<input type="color" id="colorpicker"  />
+							</div>
+						</div>
+						<div data-role="collapsible" data-inset="false">
+							<h3>Stroke Size</h3>
+							<input type="range" name="strokesize" id="strokesize" min="0" max="100" data-highlight="true" data-mini="true">
+						</div>
+					</div>
 				</div>
 			</div>
-			<div align="center" id="mapholder"></div>
-			<script src="a8.js"></script>
 		</div>
 		
 		<div data-role="footer"></div>
