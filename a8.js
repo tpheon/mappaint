@@ -8,10 +8,36 @@ function getLocation()
   }
   
 function getPosition(position)
-  {
-  alert("Latitude: " + position.coords.latitude + 
-  "Longitude: " + position.coords.longitude); 
-  }
+    {
+    alert("Latitude: " + position.coords.latitude + 
+    "Longitude: " + position.coords.longitude); 
+    }  
+
+function saveLocation(position){
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(parseLocation);
+    }
+    else{alert("Geolocation is not supported by this browser.");}
+}
+
+
+function parseLocation(position)
+{
+    Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
+    var Location = Parse.Object.extend("Location");
+    var loc = new Location();
+    loc.set("timestamp",position.timestamp);
+    loc.set("latitude",position.coords.latitude);
+    loc.set("longitude",position.coords.longitude);
+    loc.save(null, {
+        success: function(testObject) {
+            alert("Stored position.");
+        },
+        error: function(testObject, error) {
+            alert('We may have a problem:' + error.description);
+        }
+    });
+}
   
 function showLocation()
   {
