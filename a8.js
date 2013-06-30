@@ -94,7 +94,7 @@ function draw_map(){
           }
           cont.strokeStyle = "#000";
           cont.stroke();
-      }
+      },
       error: function(results, error) {
           alert('We may have a problem:' + error.description);
       }
