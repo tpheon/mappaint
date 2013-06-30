@@ -30,10 +30,10 @@ function parseLocation(position)
     loc.set("latitude",position.coords.latitude);
     loc.set("longitude",position.coords.longitude);
     loc.save(null, {
-        success: function(testObject) {
+        success: function(loc) {
             alert("Stored position.");
         },
-        error: function(testObject, error) {
+        error: function(loc, error) {
             alert('We may have a problem:' + error.description);
         }
     });
@@ -76,6 +76,31 @@ function showError(error)
       break;
     }
 }
+
+function draw_map(){
+    var c1 = document.getElementById("c1");
+    var cont = c1.getContext("2d");
+    Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
+    var Location = Parse.Object.extend("Location");
+    var query = new Parse.Query(Location);
+    query.find({ 
+      success: function(results) {
+          var dx = 10 - results[0].get('latitude');
+          var dy = 10 - results[0].get('longitude');
+          cont.beginPath();
+          cont.moveTo(100, 100);
+          for (var i=0; i<results.length; i++){
+              cont.lineTo((results[i].get('latitude') + dx)*10, (results[i].get('longitude') + dy)*10);
+          }
+          cont.strokeStyle = "#000";
+          cont.stroke();
+      }
+      error: function(results, error) {
+          alert('We may have a problem:' + error.description);
+      }
+    });
+}
+
 function draw(image)
 {
     image_set = new Array();
