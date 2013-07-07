@@ -3,10 +3,32 @@
 <head> 
 	<title>RunInk: Sport Mode</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />	
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="a8.js"></script>
+	<style type="text/css">
+        #map-canvas {
+            height: 256px;
+            width: 384px;
+            margin-top: 0.6em;
+        }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFxxx-iocJcrq4IunXhHWOsbnHVxmzD64&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(42.38897, -71.239691),
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 	<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
 	<script type="text/javascript" src="js/colorpicker.js"></script>
 	<script type="text/javascript">
@@ -33,7 +55,7 @@
     </script>
 </head> 
 
-<body onload="showLocation()"> 
+<body> 
 	<div data-role="page">
 	
 		<div data-role="header">
@@ -41,7 +63,7 @@
 		</div>
 		
 		<div data-role="content">
-			<div align="center" id="mapholder"></div>
+			<div id="map-canvas"></div>
 			<div align="center" data-role="controlgroup" data-type="horizontal">
 			<!--Gallery-->
 			<button id="gallery" type="button" name="gallery">Gallery</button>
@@ -72,3 +94,8 @@
 	</div>
 </body>
 </html>
+
+
+
+
+

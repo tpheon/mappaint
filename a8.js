@@ -43,19 +43,20 @@ function showLocation()
   {
   if (navigator.geolocation)
     {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showMap);
     }
   else{alert("Geolocation is not supported by this browser.");}
   }  
   
-function showPosition(position)
+function showMap()
 {
-var latlon=position.coords.latitude+","+position.coords.longitude;
-
-var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
-+latlon+"&zoom=14&size=400x300&sensor=false";
-
-document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+var initialLocation = new google.maps.LatLng(42.38897, -71.239691);
+var mapOptions = {
+	zoom: 12,
+	center: initialLocation,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 }
 
 function showError(error)
