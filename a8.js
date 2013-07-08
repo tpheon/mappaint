@@ -112,14 +112,20 @@ function draw_map(){
       success: function(results) {
           var dx = 10 - results[0].get('latitude');
           var dy = 10 - results[0].get('longitude');
-          color = results[0].get('color');
-          cont.beginPath();
-          cont.moveTo(100, 100);
+          var lastx = 100;
+          var lasty = 100;
+          var color = results[0].get('color');
           for (var i=0; i<results.length; i++){
-              cont.lineTo((results[i].get('latitude') + dx)*10, (results[i].get('longitude') + dy)*10);
+              cont.beginPath();
+              cont.moveTo(lastx,lasty);
+              lastx = (results[i].get('latitude') + dx)*10;
+              lasty = (results[i].get('longitude') + dy)*10;
+              cont.lineTo(lastx,lasty);
+              color = results[i].get('color');
+              cont.strokeStyle = "#" + color;
+              cont.stroke();
+              cont.closePath()
           }
-          cont.strokeStyle = "#" + color;
-          cont.stroke();
       },
       error: function(results, error) {
           alert('We may have a problem:' + error.description);
