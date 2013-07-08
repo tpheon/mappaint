@@ -7,6 +7,10 @@ function getLocation()
   else{alert("Geolocation is not supported by this browser.");}
   }
   
+function pinit(){
+    Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
+}
+  
 function getPosition(position)
     {
     alert("Latitude: " + position.coords.latitude + 
@@ -20,15 +24,34 @@ function saveLocation(position){
     else{alert("Geolocation is not supported by this browser.");}
 }
 
+function store(color){
+    saveLocation();
+    var Location = Parse.Object.extend("Location");
+    var query = new Parse.Query(Location);
+    var number;
+    query.first({
+    success: function(object) {
+        alert('got the color' + object.get('color'));
+        object.set('color',color);
+        object.save();
+        number = object.get('objectId');
+        alert('set the color' + object.get('color'));
+      },
+      error: function(object, error) {
+        alert('We may have a problem:' + error.description);
+      }
+    });
+    
+}
 
 function parseLocation(position)
 {
-    Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
     var Location = Parse.Object.extend("Location");
     var loc = new Location();
     loc.set("timestamp",position.timestamp);
     loc.set("latitude",position.coords.latitude);
     loc.set("longitude",position.coords.longitude);
+    loc.set("color","000")
     loc.save(null, {
         success: function(loc) {
             alert("Stored position.");
@@ -84,16 +107,18 @@ function draw_map(){
     Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
     var Location = Parse.Object.extend("Location");
     var query = new Parse.Query(Location);
+    var color = "000";
     query.find({ 
       success: function(results) {
           var dx = 10 - results[0].get('latitude');
           var dy = 10 - results[0].get('longitude');
+          color = results[0].get('color');
           cont.beginPath();
           cont.moveTo(100, 100);
           for (var i=0; i<results.length; i++){
               cont.lineTo((results[i].get('latitude') + dx)*10, (results[i].get('longitude') + dy)*10);
           }
-          cont.strokeStyle = "#000";
+          cont.strokeStyle = "#" + color;
           cont.stroke();
       },
       error: function(results, error) {

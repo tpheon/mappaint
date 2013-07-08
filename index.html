@@ -14,10 +14,14 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
   <script src="a8.js"></script>
+  <script type="text/javascript" src="js/colorpicker.js"></script>
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFxxx-iocJcrq4IunXhHWOsbnHVxmzD64&sensor=false">
+  </script>
   <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
   <script type="text/javascript" src="js/colorpicker.js"></script>
 </head>
-<body>
+<body onload="pinit()">
   <div data-role="page" id="splash">
     <div data-role="header">
       <h1 align="center">Welcome to Followink</h1>
@@ -43,7 +47,7 @@
         <div class="offset-label">Settings</div></a>
     </div>
     <div>
-      <a name="blob" data-role="button" onclick="saveLocation()">
+      <a name="blob" data-role="button" onclick="store('00F')">
         <div class="label">Show Coords</div>
       </a><br>
     </div>
