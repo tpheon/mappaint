@@ -10,12 +10,40 @@ function getLocation()
 function pinit(){
     Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
 }
-  
+
 function getPosition(position)
     {
     alert("Latitude: " + position.coords.latitude + 
     "Longitude: " + position.coords.longitude); 
     }  
+
+function storeGLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(saveGLocation);
+    }
+  else{alert("Geolocation is not supported by this browser.");}
+  }
+
+function saveGLocation(position){
+    var GLoc = Parse.Object.extend("GLoc");
+    var loc = new GLoc();
+    loc.set("timestamp",position.timestamp);
+    var coord = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+    console.log(coord.lat());
+    loc.set("LatLng",coord);
+    loc.set("color","000");
+    loc.save(null, {
+        success: function(loc) {
+            alert("Stored position.");
+        },
+        error: function(loc, error) {
+            alert('We may have a problem:' + error.description);
+        }
+    });
+}
+
 
 function saveLocation(position){
     if (navigator.geolocation){
@@ -51,7 +79,7 @@ function parseLocation(position)
     loc.set("timestamp",position.timestamp);
     loc.set("latitude",position.coords.latitude);
     loc.set("longitude",position.coords.longitude);
-    loc.set("color","000")
+    loc.set("color","000");
     loc.save(null, {
         success: function(loc) {
             alert("Stored position.");
@@ -99,6 +127,17 @@ function showError(error)
       alert("An unknown error occurred.");
       break;
     }
+}
+
+function minitialize() {
+    var mapOptions = {
+      center: new google.maps.LatLng(42.38897, -71.239691),
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    alert("init");
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
 }
 
 function draw_map(){
