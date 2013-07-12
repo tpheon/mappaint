@@ -19,6 +19,7 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFxxx-iocJcrq4IunXhHWOsbnHVxmzD64&sensor=false">
     </script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
@@ -57,7 +58,7 @@
     </script>
 </head> 
 
-<body> 
+<body onload="pinit()"> 
 	<div data-role="page">
 	
 		<div data-role="header">
@@ -65,12 +66,12 @@
 		</div>
 		
 		<div data-role="content">
-			<div align="center" id="map-canvas"></div>
+			<div align="center" class="map-canvas" id="map-canvas"></div>
 			<div align="center" data-role="controlgroup" data-type="horizontal">
 			<!--Gallery-->
-			<button id="gallery" type="button" name="gallery">Gallery</button>
+			<button id="gallery" type="button">Gallery</button>
 			<!--Stop-->
-			<button id="stop" type="button" onclick="getLocation()">STOP</button>
+			<button id="stop" type="button" onclick="storeGLocation()">STOP</button>
 			<!--Settings-->
 			<a href="#settingsmenu" data-rel="popup" data-role="button"><div class="label">Settings</div></a>
 				<div data-role="popup" id="settingsmenu">
