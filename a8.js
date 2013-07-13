@@ -188,3 +188,13 @@ function draw(image)
     var cont = c1.getContext("2d");
     cont.drawImage(image_set[image-1], 0, 0);
 }
+
+function initialize() {
+    var mapOptions = {
+        center: new google.maps.LatLng(42.38897, -71.239691),
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+}
