@@ -213,8 +213,8 @@ function draw_on_google_map(map){
           var wpoint = projection.fromLatLngToPoint(results[0].get('LatLng'));
           var lppoint = new google.maps.Point(wpoint.x * numTiles,wpoint.y * numTiles);
           var ppoint = lppoint;
-          var lastx = 100;
-          var lasty = 100;
+          var lastx = 192;
+          var lasty = 128;
           var dx;
           var dy;
           for (var i = 0; i<results.length; i++){
