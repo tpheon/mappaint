@@ -14,7 +14,12 @@
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
 	<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
 	<script type="text/javascript" src="js/colorpicker.js"></script>
-    
+    <style>
+    .overmap{
+        position:absolute;
+        left: +500px;
+    }
+    </style>
 </head> 
 
 <body onload="pinit()" onpageshow="initialize()"> 
@@ -26,7 +31,8 @@
 		
 		<div data-role="content">
 			<div align="center" class="map-canvas" id="map-canvas"></div>
-			<div align="center" data-role="controlgroup" data-type="horizontal">
+			<canvas id="mapvas" height="200" width="200" onclick="match_position()" class="overmap"></canvas>
+    		<div align="center" data-role="controlgroup" data-type="horizontal">
 			<!--Gallery-->
 			<button id="gallery" type="button">Gallery</button>
 			<!--Stop-->
