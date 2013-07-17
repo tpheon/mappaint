@@ -186,12 +186,17 @@ function match_position(e1,e2){
 
 function initialize() {
     var mapOptions = {
-        center: new google.maps.LatLng(42.38897, -71.239691),
-        zoom: 12,
+        center: new google.maps.LatLng(42.36702, -71.25896),
+        zoom: 10,
+        disableDefaultUI: true,
+        panControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+        draw_on_google_map(map);
+      });
     draw_on_google_map(map);
 }
 
@@ -200,13 +205,14 @@ function draw_on_google_map(map){
     var projection = new MercatorProjection();
     var mapvas = document.getElementById("mapvas");
     var cont = mapvas.getContext("2d");
+    cont.clearRect(0, 0, mapvas.width, mapvas.height);
     Parse.initialize("26Otc747ThkgjbDAgkVlFFqSPXfcjtmgWuePVGRA", "x0SDVAE2EYM7Kpg7qmGoSjCqu8ZnBn561GDwtXxN");
     var Gloc = Parse.Object.extend("GLoc");
     var query = new Parse.Query(Gloc);
     var color = "000";
     query.find({ 
       success: function(results) {
-          var wpoint = projection.fromLatLngToPoint(results[0].get('LatLng'));
+          var wpoint = projection.fromLatLngToPoint(map.getCenter());
           var lppoint = new google.maps.Point(wpoint.x * numTiles,wpoint.y * numTiles);
           var ppoint = lppoint;
           var lastx = 192;
